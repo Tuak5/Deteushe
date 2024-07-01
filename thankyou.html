@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google" content="notranslate">
+<title>Colorful Dots Emission from Circle Border with Tick Animation</title>
+<style>
+  body {
+ 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+ 
+   
+  }
+  
+  .circle-container {
+    position: absolute;
+    width: 200px; /* Adjusted width */
+    height: 200px; /* Adjusted height */
+    border: 2px solid green;
+    border-radius: 50%;
+    overflow: visible; /* Allow dots to be visible outside circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+margin-top: -559px;
+  }
+  
+  .dot {
+    position: absolute;
+    width: 8px; /* Adjusted dot size */
+    height: 8px; /* Adjusted dot size */
+    border-radius: 50%;
+    background-color: transparent;
+    z-index: 1; /* Ensure dots are above circle border */
+  }
+  
+  @keyframes draw {
+    0% {
+      stroke-dasharray: 0, 100;
+    }
+    100% {
+      stroke-dasharray: 100, 0;
+    }
+  }
+
+  .tick {
+    position: absolute;
+    width: 180px; /* Adjust the size of the tick */
+    height: 180px; /* Adjust the size of the tick */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2; /* Ensure tick is above dots */
+  }
+
+  .tick svg {
+    width: 70%; /* Adjust size of the tick inside the circle */
+    height: 70%; /* Adjust size of the tick inside the circle */
+  }
+
+  .tick path {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 4; /* Adjust the stroke width for the tick */
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 0, 100;
+    animation: draw 1s ease-out infinite; /* Animation continues indefinitely */
+  }
+
+  .text-container {
+    margin-top: 420px;
+    text-align: center;
+    max-width: 380px;
+  }
+
+  .text-container h2, .text-container p {
+    margin: 10px 0;
+  }
+ 
+            
+</style>
+</head>
+<body>
+<div class="circle-container">
+  <div class="tick">
+    <svg viewBox="0 0 64 64">
+      <path d="M8,27l12,12l24,-24"></path>
+    </svg>
+  </div>
+</div>
+
+<div class="text-container">
+     <h3  style="font-size: 23px; color: #00b300; "id="displayName"></h3></h2>
+    <p id="you" style="color: #2b2b2b;
+            font-size: 18px;
+           
+            font-weight: bold; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+       ">We are delighted to inform you that your withdrawal of</p> <h5  style="font-size: 20px; color: #37ad00; margin-top: -10px; margin-bottom: -4px; "id="displayValue1"></h5> <h7 id="hate" style="color: #2b2b2b;
+            font-size: 18px;
+           
+            font-weight: bold; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0; margin-top: -57px;">Is currently being processed.</h7>
+    <p style="color: #2b2b2b;
+            font-size: 18px;
+           
+            font-weight: bold; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+        " id="dear" >Rest assured, the funds will be swiftly transferred to the debit card details you provided. </p>
+    
+    <div class="details" style="background-color:      #2e2e2e;
+            padding: 20px;
+            border-radius: 24px;
+            margin-top: 20px;
+            text-align: left;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05); ">
+        <p style="color:  white; font-weight: bold; " id="withdraw">Withdrawal Amount:</p> <h9 style="font-size: 39px; margin-left: 160px; font-weight: bold; color: white; " id="displayValue"></h9>
+        </div>
+
+    <p id="look" style="color: #2b2b2b;
+            font-size: 18px;
+           
+            font-weight: bold; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+       "  >Your trust means everything to us, and we are committed to ensuring a smooth and secure transaction experience for you.</p>
+    <p    
+      style="color: #2b2b2b;
+            font-size: 18px;
+           
+            font-weight: bold; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+       " id="bee">If you have any questions or need further assistance, please do not hesitate to reach out to our support team.</p>
+<h3 style="color: #2b2b2b;
+            font-size: 18px;
+           
+            font-weight: bold; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;     
+      
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;" id="ant" > Thank you once again for choosing our service. We look forward to serving you!!</h3>
+    
+    <div class="footer">
+        <p style="color: #2b2b2b;
+            font-size: 16px;
+           
+            font-weight: bold; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+       " id="lopp">Best regards have a nice day👋,</p>
+    </div>
+</div>
+
+<script>
+   setTimeout(function() {
+            window.location.href = 'you.html';
+        }, 49000); // 19000 milisegundos = 19 segundos
+
+   document.addEventListener('DOMContentLoaded', () => {
+            const displayNameElement = document.getElementById('displayName');
+            const displayElement1 = document.getElementById('displayValue1');
+            const displayElement = document.getElementById('displayValue');
+
+            // Get stored name and slider value from localStorage
+            const storedName = localStorage.getItem('name');
+            const storedValue = localStorage.getItem('sliderValue');
+
+            // Display stored name
+            if (storedName) {
+                displayNameElement.textContent = `${storedName}`;
+            } else {
+                displayNameElement.textContent = 'No name stored';
+            }
+
+            // Display stored slider value
+            if (storedValue) {
+                displayElement1.textContent = `$${storedValue}`;
+                displayElement.textContent = `$${storedValue}`;
+            } else {
+                displayElement1.textContent = 'No value stored';
+                displayElement.textContent = 'No value stored';
+            }
+        });
+  document.addEventListener('DOMContentLoaded', function() {
+  const countryLanguageMap = {
+                "AF": "fa", "AL": "sq", "DZ": "ar", "AS": "en", "AD": "ca", "AO": "pt", "AG": "en",
+                "AR": "es", "AM": "hy", "AU": "en", "AT": "de", "AZ": "az", "BS": "en", "BH": "ar",
+                "BD": "bn", "BB": "en", "BY": "be", "BE": "nl", "BZ": "en", "BJ": "fr", "BT": "dz",
+                "BO": "es", "BA": "bs", "BW": "en", "BR": "pt", "BN": "ms", "BG": "bg", "BF": "fr",
+                "BI": "fr", "CV": "pt", "KH": "km", "CM": "fr", "CA": "en", "CF": "fr", "TD": "fr",
+                "CL": "es", "CN": "zh-CN", "CO": "es", "KM": "ar", "CD": "fr", "CG": "fr", "CR": "es",
+                "CI": "fr", "HR": "hr", "CU": "es", "CY": "el", "CZ": "cs", "DK": "da", "DJ": "fr",
+                "DM": "en", "DO": "es", "EC": "es", "EG": "ar", "SV": "es", "GQ": "es", "ER": "ti",
+                "EE": "et", "SZ": "en", "ET": "am", "FJ": "en", "FI": "fi", "FR": "fr", "GA": "fr",
+                "GM": "en", "GE": "ka", "DE": "de", "GH": "en", "GR": "el", "GD": "en", "GT": "es",
+                "GN": "fr", "GW": "pt", "GY": "en", "HT": "fr", "HN": "es", "HU": "hu", "IS": "is",
+                "IN": "hi", "ID": "id", "IR": "fa", "IQ": "ar", "IE": "en", "IL": "he", "IT": "it",
+                "JM": "en", "JP": "ja", "JO": "ar", "KZ": "kk", "KE": "sw", "KI": "en", "KP": "ko",
+                "KR": "ko", "KW": "ar", "KG": "ky", "LA": "lo", "LV": "lv", "LB": "ar", "LS": "en",
+                "LR": "en", "LY": "ar", "LI": "de", "LT": "lt", "LU": "lb", "MG": "mg", "MW": "en",
+                "MY": "ms", "MV": "dv", "ML": "fr", "MT": "mt", "MH": "en", "MR": "ar", "MU": "en",
+                "MX": "es", "FM": "en", "MD": "ro", "MC": "fr", "MN": "mn", "ME": "sr", "MA": "ar",
+                "MZ": "pt", "MM": "my", "NA": "en", "NR": "na", "NP": "ne", "NL": "nl", "NZ": "en",
+                "NI": "es", "NE": "fr", "NG": "en", "MK": "mk", "NO": "no", "OM": "ar", "PK": "ur",
+                "PW": "en", "PA": "es", "PG": "en", "PY": "es", "PE": "es", "PH": "tl", "PL": "pl",
+                "PT": "pt", "QA": "ar", "RO": "ro", "RU": "ru", "RW": "rw", "KN": "en", "LC": "en",
+                "VC": "en", "WS": "sm", "SM": "it", "ST": "pt", "SA": "ar", "SN": "fr", "RS": "sr",
+                "SC": "fr", "SL": "en", "SG": "zh-CN", "SK": "sk", "SI": "sl", "SB": "en", "SO": "so",
+                "ZA": "af", "SS": "en", "ES": "es", "LK": "si", "SD": "ar", "SR": "nl", "SE": "sv",
+                "CH": "de", "SY": "ar", "TW": "zh-TW", "TJ": "tg", "TZ": "sw", "TH": "th", "TL": "pt",
+                "TG": "fr", "TO": "to", "TT": "en", "TN": "ar", "TR": "tr", "TM": "tk", "UG": "en",
+                "UA": "uk", "AE": "ar", "GB": "en", "US": "en", "UY": "es", "UZ": "uz", "VU": "bi",
+                "VE": "es", "VN": "vi", "YE": "ar", "ZM": "en", "ZW": "en"
+            };
+
+            function detectCountry(callback) {
+                fetch('https://ipinfo.io/json?token=84581b889c1970')
+                    .then(response => response.json())
+                    .then(data => {
+                        callback(data.country);
+                    })
+                    .catch(error => console.error('Error detecting country:', error));
+            }
+
+            function translateText(text, targetLanguage, callback) {
+                     fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=es&tl=${targetLanguage}&dt=t&q=${encodeURI(text)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const translatedText = data[0].map(item => item[0]).join('');
+                        callback(translatedText);
+                    })
+                    .catch(error => console.error('Error translating text:', error));
+            }
+
+            function translateAllText(targetLanguage) {
+                const textsToTranslate = [
+                   
+                    { id: 'look', text: 'Your trust means everything to us, and we are committed to ensuring a smooth and secure transaction experience for you.' },
+  { id: 'you', text: 'We are delighted to inform you that your withdrawal of' },
+  { id: 'hate', text: 'Is currently being processed.' },
+  { id: 'dear', text: 'Rest assured, the funds will be swiftly transferred to the debit card details you provided.' },
+      { id: 'withdraw', text: 'Withdrawal Amount:' },
+   { id: 'bee', text: 'If you have any questions or need further assistance, please do not hesitate to reach out to our support team.' },             
+{ id: 'ant', text: 'Thank you once again for choosing our service. We look forward to serving you!!' }, 
+{ id: 'lopp', text: 'Best regards have a nice day👋,' }                 
+               
+               
+               
+               
+                ];
+
+                textsToTranslate.forEach(item => {
+                    translateText(item.text, targetLanguage, translatedText => {
+                        const element = document.getElementById(item.id);
+                        if (element) {
+                            element.innerText = translatedText;
+                        }
+                    });
+                });
+            }
+
+            detectCountry(function(country) {
+                const targetLanguage = countryLanguageMap[country] || 'es'; // Default to Spanish if country not in map
+                translateAllText(targetLanguage);
+            });
+        });
+
+       
+  const container = document.querySelector('.circle-container');
+  const radius = 100; // Adjust the radius as needed
+  const numDots = 36; // Adjust the number of dots as needed
+  const moveDistance = 80; // Distance after which dot resets, slightly more than radius
+
+  // Function to create and position dots around the circle
+  function createDots() {
+    const angleIncrement = (2 * Math.PI) / numDots;
+    
+    for (let i = 0; i < numDots; i++) {
+      const angle = i * angleIncrement;
+      const dotX = radius * Math.cos(angle); // Start dots exactly on the circle border
+      const dotY = radius * Math.sin(angle); // Start dots exactly on the circle border
+      
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      dot.style.left = `${radius + dotX - 4}px`; // Adjust size and positioning
+      dot.style.top = `${radius + dotY - 4}px`; // Adjust size and positioning
+
+      // Store initial position
+      dot.startX = radius + dotX - 4;
+      dot.startY = radius + dotY - 4;
+      
+      // Assign random colors to dots
+      dot.style.backgroundColor = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+      
+      // Diagonal movement components
+      const vx = Math.cos(angle);
+      const vy = Math.sin(angle);
+      
+      // Move the dot diagonally
+      moveDot(dot, vx, vy);
+      
+      container.appendChild(dot);
+    }
+  }
+
+  // Function to move dot diagonally
+  function moveDot(dot, vx, vy) {
+    const speed = 1; // Adjust speed as needed
+    let distance = 0; // Distance traveled by the dot
+    
+    function update() {
+      const left = dot.startX + distance * vx;
+      const top = dot.startY + distance * vy;
+      
+      dot.style.left = `${left}px`;
+      dot.style.top = `${top}px`;
+      
+      // Increment distance traveled
+      distance += speed;
+      
+      // Reset dot position if distance exceeds moveDistance
+      if (distance >= moveDistance) {
+        distance = 0; // Reset distance traveled
+      }
+      
+      requestAnimationFrame(update);
+    }
+    
+    update();
+  }
+
+  // Call the function to create dots
+  createDots();
+  
+</script>
+</body>
+</html>
